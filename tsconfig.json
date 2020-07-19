@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"module": "none",
+		"jsx": "react",
+		"target": "esnext",
+		"outDir": "./dist",
+		"moduleResolution": "node",
+		"lib": ["es2015", "dom", "dom.iterable", "es2019"],
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"typeRoots": [
+		  "./types",
+          "./node_modules/@types",
+		],
+        "skipLibCheck": true
+    },
+    "include": [
+        "./",
+        "./lib",
+        "./types",
+        "./node_modules/@types",
+    ],
+	"exclude": [
+        "**/__tests__/**/*",
+        "./node_modules"
+    ]
+}
