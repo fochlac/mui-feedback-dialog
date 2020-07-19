@@ -1,55 +1,35 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-const tsLoaderOptions = {
-    configFile: 'tsconfig.json'
-}
 
 module.exports = {
-    entry: ['./lib/index.tsx'],
+    entry: ['./lib/index.ts'],
     output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, './dist'),
+        filename: 'index.js',
+        libraryTarget: 'commonjs2'
     },
-    mode: 'development',
+    externals: {
+        '@material-ui/icons': '@material-ui/icons',
+        "@material-ui/core": '@material-ui/core',
+        "@material-ui/core/SvgIcon": '@material-ui/core/SvgIcon',
+        react: 'react',
+        reactDOM: 'react-dom'
+    },
+    mode: 'production',
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/,
-                options: tsLoaderOptions
-            },
-            {
-                test: /\.tsx$/,
-                loader: 'ts-loader',
-                exclude: /node_modules/,
-                options: tsLoaderOptions
+                options: {
+                    configFile: 'tsconfig.json'
+                }
             }
         ]
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', 'css']
     },
-    plugins: [
-        new CopyWebpackPlugin({
-                patterns: [
-                {
-                    from: './static',
-                    to: '',
-                    globOptions: {
-                        ignore: ['**/index.html'],
-                    },
-                }
-            ]
-        }),
-        new HtmlWebpackPlugin({
-            template: './static/index.html',
-            filename: 'index.html',
-            inject: 'body'
-        })
-    ],
     devtool: 'source-map'
 }

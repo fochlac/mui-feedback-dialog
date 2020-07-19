@@ -1,16 +1,16 @@
 {
     "name": "mui-feedback-dialog",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "homepage": "https://github.com/fochlac/mui-feedback-dialog",
     "description": "A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.",
-    "main": "lib/index.ts",
+    "main": "dist/index.js",
     "directories": {
         "lib": "lib"
     },
     "scripts": {
         "test": "jest",
         "start": "webpack -w",
-        "build": "rm -rf ./dist/static && webpack -p --config webpack.config.prod.js",
+        "build": "rm -rf ./dist/ && webpack -p --config webpack.config.js",
         "lint": "eslint ./lib/**/*.tsx ./lib/**/*.ts"
     },
     "author": "Florian Riedel",
@@ -85,6 +85,5 @@
         "webpack-cli": "^3.3.12",
         "webpack-node-externals": "^2"
     },
-    "dependencies": {
-    }
+    "dependencies": {}
 }

@@ -1,13 +1,13 @@
 
 import React from 'react'
 import { DialogTitle, DialogContent, Button, Dialog, DialogActions, DialogContentText, TextField, FormControlLabel, Checkbox, Collapse, Box, ButtonGroup, Tooltip, Typography } from '@material-ui/core'
-import CreateIcon from '@material-ui/icons/Create';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import CreateIcon from '@material-ui/icons/Create'
+import RotateLeftIcon from '@material-ui/icons/RotateLeft'
 import { EraserIcon } from './icons/Eraser';
-import StopIcon from '@material-ui/icons/Stop';
+import StopIcon from '@material-ui/icons/Stop'
 import { useFeedbackDialogController } from './useFeedback';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { blue } from '@material-ui/core/colors';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import { colors } from '@material-ui/core'
 
 const defaultText = {
     title: 'Give Feedback',
@@ -82,8 +82,8 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                 display: 'flex',
                 padding: 8,
                 margin: '8px 0',
-                background: blue[50],
-                color: blue[900]
+                background: colors.blue[50],
+                color: colors.blue[900]
             }}>
                 <InfoOutlinedIcon style={{ marginRight: 8 }} />
                 <Typography>{t.screenshotInfo}</Typography>
