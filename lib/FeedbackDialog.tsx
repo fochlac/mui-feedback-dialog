@@ -79,16 +79,19 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                 rows={4}
                 fullWidth
             />
-            <Box style={{
-                display: 'flex',
-                padding: 8,
-                margin: '8px 0',
-                background: colors.blue[50],
-                color: colors.blue[900]
-            }}>
-                <InfoOutlinedIcon style={{ marginRight: 8 }} />
-                <Typography>{t.screenshotInfo}</Typography>
-            </Box>
+            {!includeSS && (
+                <Box style={{
+                    display: 'flex',
+                    padding: 8,
+                    margin: '8px 0',
+                    background: colors.blue[50],
+                    color: colors.blue[900]
+                }}>
+                    <InfoOutlinedIcon style={{ marginRight: 8 }} />
+                    <Typography>{t.screenshotInfo}</Typography>
+                </Box>
+            )
+            }
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 }}>
                 <FormControlLabel
                     control={
