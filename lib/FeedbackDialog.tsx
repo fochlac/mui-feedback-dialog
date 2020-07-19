@@ -143,7 +143,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                         visibility: 'visible',
                         width: 3,
                         height: 3,
-                        borderRadius:'50%',
+                        borderRadius: '50%',
                         backgroundColor: 'red'
                     }} />
                     <canvas
@@ -162,7 +162,11 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
             <Button onClick={closeDialog} color='default'>
                 {t.cancel}
             </Button>
-            <Tooltip arrow title={t.tooltipSubmit}>
+            <Tooltip
+                arrow title={t.tooltipSubmit}
+                disableFocusListener={!!canSubmit}
+                disableHoverListener={!!canSubmit}
+                disableTouchListener={!!canSubmit}>
                 <Button onClick={submit} disabled={!canSubmit} component='div' color='primary'>
                     {t.submit}
                 </Button>
