@@ -17,12 +17,36 @@ const FeedbackButton: React.FunctionComponent<{ mobile?: boolean }> = () => {
     const [dialogVisible, setDialogVisible] = useState(false)
 
     return <>
-        <IconButton onClick={() => setDialogVisible(true)} size={mobile ? 'small' : 'medium'}>
-            <FeedbackIcon  fontSize={mobile ? 'default' : 'large'} className={styles['icon']}/>
+        <IconButton onClick={() => setDialogVisible(true)}>
+            <FeedbackIcon />
         </IconButton>
         <FeedbackDialog open={dialogVisible} onClose={() => setDialogVisible(false)} onSubmit={console.log} />
     </>
 }
 ```
+
+FeedbackDialog takes 4 props: 
+* `open` [boolean]: whether the dialog is shown or not
+* `onClose` [function]: callback to close the dialog
+* `onSubmit` [function]: callback on submit with the feedback object:
+```
+{
+    description: 'Some description.',
+    screenshot: 'base64-encoded screenshot in webp format'
+}
+```
+* `text` [object]: possibility to overwrite the default strings:
+    * title
+    * cancel
+    * submit
+    * contentText
+    * feedbackLabel
+    * includeScreenshot
+    * tooltipPen
+    * tooltipEraser
+    * tooltipBlackbox
+    * tooltipReset
+    * screenshotInfo 
+
 #### Screenshot
 ![SampleScreenshot](https://github.com/fochlac/mui-feedback-dialog/blob/master/feedback-dialog.jpg?raw=true)
