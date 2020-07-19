@@ -11,7 +11,7 @@ export function useFeedbackDialogController({ onClose, open, onSubmit }) {
     const drawCanvasRef = useRef<HTMLCanvasElement>(null)
     const penRef = useRef<HTMLDivElement>(null)
     const dialogRef = useRef<HTMLDivElement>(null)
-    const [activeTool, setActiveTool] = useState<'pen'|'eraser'|'blackbox'>('pen')
+    const [activeTool, setActiveTool] = useState<'pen' | 'eraser' | 'blackbox'>('pen')
 
     usePencil(activeTool === 'pen' && drawCanvasRef, dialogRef, penRef)
     useBlackBox(activeTool === 'blackbox' && drawCanvasRef, dialogRef, penRef)
@@ -75,14 +75,16 @@ export function useFeedbackDialogController({ onClose, open, onSubmit }) {
         includeSS,
         closeDialog: onClose,
         submit: () => {
-            let screenshot = null
-            if (includeSS) {
-                const context = canvasRef.current.getContext('2d')
-                context.drawImage(drawCanvasRef.current, 0, 0)
-                screenshot = canvasRef.current.toDataURL('webp', 0.9)
+            if (description.length) {
+                let screenshot = null
+                if (includeSS) {
+                    const context = canvasRef.current.getContext('2d')
+                    context.drawImage(drawCanvasRef.current, 0, 0)
+                    screenshot = canvasRef.current.toDataURL('webp', 0.9)
+                }
+                onSubmit({ description, screenshot })
+                onClose()
             }
-            onSubmit({ description, screenshot })
-            onClose()
         },
         canvasRef,
         penRef,

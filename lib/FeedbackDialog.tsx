@@ -20,6 +20,7 @@ const defaultText = {
     tooltipEraser: 'Eraser',
     tooltipBlackbox: 'Black Rectangle',
     tooltipReset: 'Reset Drawings',
+    tooltipSubmit: 'Please enter a short description.',
     screenshotInfo: 'If you select "Attach Screenshot", the browser will ask you to share your screen. ' +
         'Please select the current browser tab, of which a single screenshot will be taken and displayed for preview below.'
 }
@@ -161,9 +162,11 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
             <Button onClick={closeDialog} color='default'>
                 {t.cancel}
             </Button>
-            <Button onClick={submit} disabled={!canSubmit} color='primary'>
-                {t.submit}
-            </Button>
+            <Tooltip arrow title={t.tooltipSubmit}>
+                <Button onClick={submit} disabled={!canSubmit} component='div' color='primary'>
+                    {t.submit}
+                </Button>
+            </Tooltip>
         </DialogActions>
     </Dialog>
 }

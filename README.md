@@ -6,6 +6,10 @@ A customizeable React feedback form with optional screenshot via screen capture 
 
 #### Installation
 
+You also need to include `@material-ui/core`, `@material-ui/icons`, `react`, and `react-dom`. IF you have not already done so, you can install them with: 
+`npm install --save @material-ui/core @material-ui/icons react react-dom`
+
+Then you can install this library with:
 `npm install --save mui-feedback-dialog`
 
 #### Usage
@@ -46,6 +50,7 @@ FeedbackDialog takes 4 props:
     * tooltipEraser
     * tooltipBlackbox
     * tooltipReset
+    * tooltipSubmit
     * screenshotInfo 
 
 #### Screenshot
