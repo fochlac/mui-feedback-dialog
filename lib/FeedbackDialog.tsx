@@ -164,6 +164,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
             </Button>
             <Tooltip
                 arrow title={t.tooltipSubmit}
+                placement='top'
                 disableFocusListener={!!canSubmit}
                 disableHoverListener={!!canSubmit}
                 disableTouchListener={!!canSubmit}>
