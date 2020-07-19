@@ -1,4 +1,10 @@
-export const attachHandlers = (canvasRef, dialogRef, handleMouseDown, handleMouseMove, handleMouseUp) => {
+export const attachHandlers = (
+    canvasRef: React.RefObject<HTMLCanvasElement>,
+    dialogRef: React.RefObject<HTMLDivElement>,
+    handleMouseDown: (event: MouseEvent) => void,
+    handleMouseMove: (event: MouseEvent) => void,
+    handleMouseUp: (event: MouseEvent) => void
+):(() => void) => {
     const handleMouseOut = (e) => {
         e = e || window.event
         const from = e.relatedTarget || e.toElement

@@ -1,7 +1,7 @@
-import { useEffect } from "react"
-import { attachHandlers } from "../utils/handlers"
+import { useEffect } from 'react'
+import { attachHandlers } from '../utils/handlers'
 
-export const useBlackBox = (canvasRef, dialogRef, penRef) => {
+export const useBlackBox = (canvasRef: React.RefObject<HTMLCanvasElement>, dialogRef: React.RefObject<HTMLDivElement>, penRef: React.RefObject<HTMLDivElement>): void => {
     let start = null
     let imageData = null
 
@@ -9,7 +9,7 @@ export const useBlackBox = (canvasRef, dialogRef, penRef) => {
         if (canvasRef.current) {
             const context = canvasRef.current.getContext('2d')
 
-            const getPoint = e => {
+            const getPoint = (e) => {
                 const { top, left, width } = canvasRef.current.getBoundingClientRect()
                 const scale = width / canvasRef.current.width
 
@@ -48,7 +48,6 @@ export const useBlackBox = (canvasRef, dialogRef, penRef) => {
                 start = null
                 imageData = null
             }
-
 
             const drawRectangle = ({x, y}) => {
                 const startX = x < start.x ? x : start.x

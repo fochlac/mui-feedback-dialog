@@ -1,5 +1,5 @@
-/* tslint:disable */
-function getDisplayMedia(options) {
+function getDisplayMedia (options) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const nav = navigator as any
     if (nav.mediaDevices && nav.mediaDevices.getDisplayMedia) {
         return nav.mediaDevices.getDisplayMedia(options)
@@ -16,7 +16,8 @@ function getDisplayMedia(options) {
     throw new Error('getDisplayMedia is not defined')
 }
 
-function getUserMedia(options) {
+function getUserMedia (options) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const nav = navigator as any
     if (nav.mediaDevices && nav.mediaDevices.getUserMedia) {
         return nav.mediaDevices.getUserMedia(options)
@@ -32,9 +33,8 @@ function getUserMedia(options) {
     }
     throw new Error('getUserMedia is not defined')
 }
-/* tslint:enable */
 
-async function takeScreenshotStream() {
+async function takeScreenshotStream () {
     // see: https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
     const width = screen.width * (window.devicePixelRatio || 1)
     const height = screen.height * (window.devicePixelRatio || 1)
@@ -49,10 +49,11 @@ async function takeScreenshotStream() {
                 displaySurface: 'browser',
                 width,
                 height,
-                frameRate: 4,
-            },
+                frameRate: 4
+            }
         })
-    } catch (ex) {
+    }
+    catch (ex) {
         errors.push(ex)
     }
 
@@ -63,15 +64,15 @@ async function takeScreenshotStream() {
             video: {
                 mandatory: {
                     chromeMediaSource: 'tab',
-                    // chromeMediaSourceId: source.id,
-                    minWidth         : width,
-                    maxWidth         : width,
-                    minHeight        : height,
-                    maxHeight        : height,
-                },
-            },
+                    minWidth: width,
+                    maxWidth: width,
+                    minHeight: height,
+                    maxHeight: height
+                }
+            }
         })
-    } catch (ex) {
+    }
+    catch (ex) {
         errors.push(ex)
     }
 
@@ -82,7 +83,7 @@ async function takeScreenshotStream() {
     return stream
 }
 
-export async function takeScreenshotCanvas(canvas) {
+export async function takeScreenshotCanvas (canvas: HTMLCanvasElement): Promise<HTMLCanvasElement> {
     const stream = await takeScreenshotStream()
 
     if (!stream) {
@@ -91,10 +92,10 @@ export async function takeScreenshotCanvas(canvas) {
 
     // from: https://stackoverflow.com/a/57665309/5221762
     const video = document.createElement('video')
-    const result = await new Promise((resolve, reject) => {
+    const result: HTMLCanvasElement = await new Promise((resolve) => {
         video.onloadedmetadata = async () => {
             video.play()
-            await new Promise(r => setTimeout(r, 251))
+            await new Promise((r) => setTimeout(r, 251))
             video.pause()
 
             const context = canvas.getContext('2d')

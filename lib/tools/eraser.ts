@@ -1,14 +1,14 @@
-import { useEffect } from "react"
-import { attachHandlers } from "../utils/handlers"
+import { useEffect } from 'react'
+import { attachHandlers } from '../utils/handlers'
 
-export const useEraser = (canvasRef, dialogRef, penRef) => {
+export const useEraser = (canvasRef: React.RefObject<HTMLCanvasElement>, dialogRef: React.RefObject<HTMLDivElement>, penRef: React.RefObject<HTMLDivElement>): void => {
     let lastPoint = null
 
     useEffect(() => {
         if (canvasRef.current) {
             const context = canvasRef.current.getContext('2d')
 
-            const getPoint = e => {
+            const getPoint = (e) => {
                 const { top, left, width } = canvasRef.current.getBoundingClientRect()
                 const scale = width / canvasRef.current.width
 
