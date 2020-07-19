@@ -55,8 +55,8 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
     } = useFeedbackDialogController({ onClose, open, onSubmit })
 
     const t = {
-        ...(text || {}),
-        ...defaultText
+        ...defaultText,
+        ...(text || {})
     }
 
     return <Dialog open={open} maxWidth='md' onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }}>
