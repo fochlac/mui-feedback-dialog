@@ -1,6 +1,6 @@
 {
     "name": "mui-feedback-dialog",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "homepage": "https://github.com/fochlac/mui-feedback-dialog",
     "description": "A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.",
     "main": "dist/index.js",
@@ -14,7 +14,7 @@
         "lint": "eslint ./lib/**/*.tsx ./lib/**/*.ts"
     },
     "author": "Florian Riedel",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "jest": {
         "testRegex": "/__tests__/.*-test.[jt]sx?$",
         "testPathIgnorePatterns": [
