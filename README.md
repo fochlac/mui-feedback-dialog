@@ -1,4 +1,4 @@
-# mui-feedback-dialog ![npm](https://img.shields.io/npm/v/mui-feedback-dialog)
+# mui-feedback-dialog ![https://www.npmjs.com/package/mui-feedback-dialog](https://img.shields.io/npm/v/mui-feedback-dialog)
 
 A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.
 
