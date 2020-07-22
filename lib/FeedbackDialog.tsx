@@ -3,9 +3,9 @@ import React from 'react'
 import { DialogTitle, DialogContent, Button, Dialog, DialogActions, DialogContentText, TextField, FormControlLabel, Checkbox, Collapse, Box, ButtonGroup, Tooltip, Typography } from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create'
 import RotateLeftIcon from '@material-ui/icons/RotateLeft'
-import { EraserIcon } from './icons/Eraser';
+import { EraserIcon } from './icons/Eraser'
 import StopIcon from '@material-ui/icons/Stop'
-import { useFeedbackDialogController } from './useFeedback';
+import { useFeedbackDialogController } from './useFeedback'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import { colors } from '@material-ui/core'
 
@@ -13,8 +13,10 @@ const defaultText = {
     title: 'Give Feedback',
     cancel: 'Cancel',
     submit: 'Submit Feedback',
-    contentText: 'Thank you for giving feedback. Please describe any issue as detailed as possible.',
+    contentText: 'Thank you for giving feedback. Please describe any issue as detailed as possible. ' +
+        'If it is okay to contact you for more details, please write down your email address as well.',
     feedbackLabel: 'Description',
+    emailLabel: 'Email Address',
     includeScreenshot: 'Attach Screenshot',
     tooltipPen: 'Pen',
     tooltipEraser: 'Eraser',
@@ -27,12 +29,13 @@ const defaultText = {
 
 interface Props {
     open?: boolean;
-    onClose?: Function;
+    onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string }) => unknown;
+    tenantId?: string;
     text?: Record<string, string>;
 }
 
-const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit }) => {
+const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, tenantId }) => {
     const {
         closeDialog,
         submit,
@@ -51,8 +54,10 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         useBlackBox,
         description,
         onDescriptionChange,
+        email,
+        onEmailChange,
         penRef
-    } = useFeedbackDialogController({ onClose, open, onSubmit })
+    } = useFeedbackDialogController({ onClose, open, onSubmit, tenantId })
 
     const t = {
         ...defaultText,
@@ -68,14 +73,31 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                 {t.contentText}
             </DialogContentText>
             <TextField
+                style={{ marginBottom: 8 }}
+                autoFocus
+                value={email}
+                onChange={onEmailChange}
+                margin="dense"
+                id="email"
+                InputLabelProps={{
+                    shrink: true
+                }}
+                label={t.emailLabel}
+                fullWidth
+            />
+            <TextField
                 style={{ overflowY: 'visible', height: 'auto' }}
                 autoFocus
                 value={description}
                 onChange={onDescriptionChange}
                 margin="dense"
                 id="description"
+                InputLabelProps={{
+                    shrink: true
+                }}
                 label={t.feedbackLabel}
                 multiline
+                required
                 rows={4}
                 fullWidth
             />
@@ -137,9 +159,9 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                 </ButtonGroup>}
             </Box>
             <Collapse in={includeSS} timeout="auto" enter={false} style={{ display: 'flex', justifyContent: 'center' }}>
-                <div style={{ border: 'solid 1px black', position: "relative", overflow: 'hidden' }}>
+                <div style={{ border: 'solid 1px black', position: 'relative', overflow: 'hidden' }}>
                     <div ref={penRef} style={{
-                        position: "absolute",
+                        position: 'absolute',
                         pointerEvents: 'none',
                         zIndex: 1,
                         transform: 'translate(-50%, -50%)',
@@ -154,7 +176,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                         width={550}
                         height={350} />
                     <canvas
-                        style={{ position: "absolute", top: 0, left: 0 }}
+                        style={{ position: 'absolute', top: 0, left: 0 }}
                         ref={drawCanvasRef}
                         width={550}
                         height={350} />

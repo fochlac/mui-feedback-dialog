@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useState, useRef, useEffect } from 'react'
-import { takeScreenshotCanvas } from './utils/screenshot';
-import { usePencil } from './tools/pencil';
-import { useEraser } from './tools/eraser';
-import { useBlackBox } from './tools/blacken';
+import { takeScreenshotCanvas } from './utils/screenshot'
+import { usePencil } from './tools/pencil'
+import { useEraser } from './tools/eraser'
+import { useBlackBox } from './tools/blacken'
+import { postRequest } from './utils/http'
 
-export function useFeedbackDialogController({ onClose, open, onSubmit }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit, tenantId }) {
     const [description, setDescription] = useState('')
+    const [email, setEmail] = useState('')
     const [includeSS, setIncludeSS] = useState(false)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const drawCanvasRef = useRef<HTMLCanvasElement>(null)
@@ -71,6 +74,8 @@ export function useFeedbackDialogController({ onClose, open, onSubmit }) {
     return {
         canSubmit: description.length,
         description,
+        email,
+        onEmailChange: (e) => setEmail(e.target.value),
         onDescriptionChange: (e) => setDescription(e.target.value),
         includeSS,
         closeDialog: onClose,
@@ -82,7 +87,10 @@ export function useFeedbackDialogController({ onClose, open, onSubmit }) {
                     context.drawImage(drawCanvasRef.current, 0, 0)
                     screenshot = canvasRef.current.toDataURL('webp', 0.9)
                 }
-                onSubmit({ description, screenshot })
+                if (tenantId) {
+                    postRequest('https://feedback.fochlac.com/api/reports', { description, screenshot, email, tenantId })
+                }
+                onSubmit({ description, screenshot, email })
                 onClose()
             }
         },

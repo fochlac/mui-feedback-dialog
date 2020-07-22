@@ -36,9 +36,11 @@ FeedbackDialog takes 4 props:
 ```
 {
     description: 'Some description.',
+    email: 'some@email.com',
     screenshot: 'base64-encoded screenshot in webp format'
 }
 ```
+* `tenantId` [string]: Channel Id of your feedback-channel at [https://feedback.fochlac.com]. You can use this service to store your feedback fully enctypted.
 * `text` [object]: possibility to overwrite the default strings:
     * title
     * cancel
@@ -53,5 +55,8 @@ FeedbackDialog takes 4 props:
     * tooltipSubmit
     * screenshotInfo 
 
-#### Screenshot
+## Screenshot
 ![SampleScreenshot](https://github.com/fochlac/mui-feedback-dialog/blob/master/feedback-dialog.jpg?raw=true)
+
+## Demo
+[CodeSandbox - Demo](https://codesandbox.io/s/feedback-dialog-fdp7b)
