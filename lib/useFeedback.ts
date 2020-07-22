@@ -90,7 +90,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, tenantId
                 if (tenantId) {
                     postRequest('https://feedback.fochlac.com/api/reports', { description, screenshot, email, tenantId })
                 }
-                onSubmit({ description, screenshot, email })
+                onSubmit && onSubmit({ description, screenshot, email })
                 onClose()
             }
         },
