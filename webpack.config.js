@@ -8,8 +8,7 @@ module.exports = {
         filename: 'index.js',
         library: 'mui-feedback-dialog',
         libraryTarget: 'umd',
-        umdNamedDefine: true,
-        libraryExport: 'default'
+        umdNamedDefine: true
     },
     externals: {
         '@material-ui/icons': '@material-ui/icons',
