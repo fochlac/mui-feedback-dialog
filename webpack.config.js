@@ -6,7 +6,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'index.js',
-        libraryTarget: 'commonjs2'
+        library: 'mui-feedback-dialog',
+        libraryTarget: 'umd',
+        umdNamedDefine: true,
+        libraryExport: 'default'
     },
     externals: {
         '@material-ui/icons': '@material-ui/icons',

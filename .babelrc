@@ -5,9 +5,7 @@
 		[
 			"@babel/preset-env",
 			{
-                "targets": {
-                    "node": "8"
-                },
+                "targets": "> 0.25%, not dead",
                 "corejs": 3,
                 "useBuiltIns": "usage",
 				"debug": false
