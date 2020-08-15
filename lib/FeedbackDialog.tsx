@@ -65,7 +65,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         ...(text || {})
     }
 
-    return <Dialog open={open} maxWidth='md' onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }} className={className}>
+    return <Dialog open={open} maxWidth='md' onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }} classes={{ container: className }}>
         <DialogTitle>
             {t.title}
         </DialogTitle>
@@ -185,7 +185,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
             </Collapse>
         </DialogContent>
         <DialogActions>
-            <Button onClick={closeDialog} color='default'>
+            <Button onClick={closeDialog} color='default' className="cancel-button">
                 {t.cancel}
             </Button>
             <Tooltip
@@ -194,7 +194,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                 disableFocusListener={!!canSubmit}
                 disableHoverListener={!!canSubmit}
                 disableTouchListener={!!canSubmit}>
-                <Button onClick={submit} disabled={!canSubmit} component='div' color='primary'>
+                <Button onClick={submit} disabled={!canSubmit} component='div' color='primary' className="submit-button">
                     {t.submit}
                 </Button>
             </Tooltip>
