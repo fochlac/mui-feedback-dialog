@@ -32,10 +32,11 @@ interface Props {
     onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string }) => unknown;
     tenantId?: string;
+    className?: string;
     text?: Record<string, string>;
 }
 
-const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, tenantId }) => {
+const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, tenantId, className }) => {
     const {
         closeDialog,
         submit,
@@ -64,7 +65,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         ...(text || {})
     }
 
-    return <Dialog open={open} maxWidth='md' onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }}>
+    return <Dialog open={open} maxWidth='md' onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }} className={className}>
         <DialogTitle>
             {t.title}
         </DialogTitle>

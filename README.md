@@ -29,7 +29,7 @@ const FeedbackButton: React.FunctionComponent<{ mobile?: boolean }> = () => {
 }
 ```
 
-FeedbackDialog takes 4 props: 
+FeedbackDialog takes 6 props: 
 * `open` [boolean]: whether the dialog is shown or not
 * `onClose` [function]: callback to close the dialog
 * `onSubmit` [function]: callback on submit with the feedback object:
@@ -41,6 +41,7 @@ FeedbackDialog takes 4 props:
 }
 ```
 * `tenantId` [string]: Channel Id of your feedback-channel at [https://feedback.fochlac.com]. You can use this service to store your feedback fully enctypted.
+* `className` [string]: className applied to the dialog component.
 * `text` [object]: possibility to overwrite the default strings:
     * title
     * cancel
