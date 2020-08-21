@@ -23,6 +23,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, tenantId
     useEffect(() => {
         setIncludeSS(false)
         setDescription('')
+        setEmail('')
         if (canvasRef.current) {
             canvasRef.current.getContext('2d')
                 .clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight)
