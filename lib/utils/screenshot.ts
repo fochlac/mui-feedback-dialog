@@ -1,3 +1,5 @@
+import domtoimage from 'dom-to-image'
+
 function getDisplayMedia (options) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const nav = navigator as any
@@ -119,4 +121,31 @@ export async function takeScreenshotCanvas (canvas: HTMLCanvasElement): Promise<
     })
 
     return result
+}
+
+export async function createHTMLImageCanvas (canvas: HTMLCanvasElement): Promise<HTMLCanvasElement> {
+    const node = document.documentElement
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+    const dataUrl = await domtoimage.toPng(node)
+    return new Promise((resolve) => {
+        const image = new Image()
+        image.onload = function () {
+            const context = canvas.getContext('2d')
+            canvas.width = vw
+            canvas.height = vh
+            context.drawImage(image, 0, 0)
+
+            if (vw > vh) {
+                canvas.style.width = '100%'
+            }
+            else {
+                canvas.style.width = Math.ceil(450 / vh * vw) + 'px'
+            }
+
+            resolve(canvas)
+        }
+        image.src = dataUrl
+    })
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useState, useRef, useEffect } from 'react'
-import { takeScreenshotCanvas } from './utils/screenshot'
+import { createHTMLImageCanvas, takeScreenshotCanvas } from './utils/screenshot'
 import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
@@ -37,6 +37,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit }) {
             dialogRef.current.style.visibility = 'hidden'
 
             takeScreenshotCanvas(canvasRef.current)
+                .catch(() => createHTMLImageCanvas(canvasRef.current))
                 .then(() => setIncludeSS(isVisible))
                 .catch(() => setIncludeSS(false))
                 .then(() => {

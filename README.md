@@ -42,12 +42,15 @@ FeedbackDialog takes 5 props:
     screenshot: 'base64-encoded screenshot in webp format'
 }
 ```
+* `noScreenshot` [boolean]: whether the option to show a screenshot is shown at all.
 * `className` [string]: className applied to the dialog component.
 * `text` [object]: possibility to overwrite the default strings:
     * title
     * cancel
     * submit
     * contentText
+    * emailLabel
+    * emailError
     * feedbackLabel
     * includeScreenshot
     * tooltipPen
