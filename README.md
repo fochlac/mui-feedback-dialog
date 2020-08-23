@@ -2,6 +2,8 @@
 
 A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.
 
+If you want to use my free fully end-to-end encrypted display service for your recieved feedback, you should use [mui-feedback-dialog-connected](https://github.com/fochlac/mui-feedback-dialog-connected). That library uses this dialog but already handles the encryption and submission of the recieved feedback. If you already have your own infrastructure feel free to use this un-opinionated library.
+
 ## API
 
 #### Installation
@@ -29,7 +31,7 @@ const FeedbackButton: React.FunctionComponent<{ mobile?: boolean }> = () => {
 }
 ```
 
-FeedbackDialog takes 6 props: 
+FeedbackDialog takes 5 props: 
 * `open` [boolean]: whether the dialog is shown or not
 * `onClose` [function]: callback to close the dialog
 * `onSubmit` [function]: callback on submit with the feedback object:
@@ -40,7 +42,6 @@ FeedbackDialog takes 6 props:
     screenshot: 'base64-encoded screenshot in webp format'
 }
 ```
-* `tenantId` [string]: Channel Id of your feedback-channel at [https://feedback.fochlac.com]. You can use this service to store your feedback fully enctypted.
 * `className` [string]: className applied to the dialog component.
 * `text` [object]: possibility to overwrite the default strings:
     * title

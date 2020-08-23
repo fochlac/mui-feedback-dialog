@@ -4,9 +4,8 @@ import { takeScreenshotCanvas } from './utils/screenshot'
 import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
-import { postRequest } from './utils/http'
 
-export function useFeedbackDialogController ({ onClose, open, onSubmit, tenantId }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit }) {
     const [description, setDescription] = useState('')
     const [email, setEmail] = useState('')
     const [includeSS, setIncludeSS] = useState(false)
@@ -87,9 +86,6 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, tenantId
                     const context = canvasRef.current.getContext('2d')
                     context.drawImage(drawCanvasRef.current, 0, 0)
                     screenshot = canvasRef.current.toDataURL('webp', 0.9)
-                }
-                if (tenantId) {
-                    postRequest('https://feedback.fochlac.com/api/reports', { description, screenshot, email, tenantId })
                 }
                 onSubmit && onSubmit({ description, screenshot, email })
                 onClose()

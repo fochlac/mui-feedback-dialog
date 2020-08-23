@@ -1,6 +1,6 @@
 {
     "name": "mui-feedback-dialog",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "homepage": "https://github.com/fochlac/mui-feedback-dialog",
     "description": "A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.",
     "main": "dist/index.js",
@@ -84,6 +84,5 @@
         "webpack-bundle-size-analyzer": "^3.1.0",
         "webpack-cli": "^3.3.12",
         "webpack-node-externals": "^2"
-    },
-    "dependencies": {}
+    }
 }

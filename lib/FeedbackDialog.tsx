@@ -30,13 +30,12 @@ const defaultText = {
 interface Props {
     open?: boolean;
     onClose?: () => void;
-    onSubmit?: (feedback: { screenshot?: string; description: string }) => unknown;
-    tenantId?: string;
+    onSubmit?: (feedback: { screenshot?: string; description: string, email: string }) => unknown;
     className?: string;
     text?: Record<string, string>;
 }
 
-const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, tenantId, className }) => {
+const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, className }) => {
     const {
         closeDialog,
         submit,
@@ -58,7 +57,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         email,
         onEmailChange,
         penRef
-    } = useFeedbackDialogController({ onClose, open, onSubmit, tenantId })
+    } = useFeedbackDialogController({ onClose, open, onSubmit })
 
     const t = {
         ...defaultText,
