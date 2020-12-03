@@ -5,7 +5,7 @@ import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
 
-export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture, rootElement }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture }) {
     const [description, setDescription] = useState('')
     const [email, setEmail] = useState('')
     const [includeSS, setIncludeSS] = useState(false)
@@ -41,7 +41,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, useScree
                 : Promise.resolve()
 
             screenCapture()
-                .catch(() => createHTMLImageCanvas(canvasRef.current, rootElement))
+                .catch(() => createHTMLImageCanvas(canvasRef.current))
                 .then(() => setIncludeSS(isVisible))
                 .catch(() => setIncludeSS(false))
                 .then(() => {

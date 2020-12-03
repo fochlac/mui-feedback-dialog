@@ -123,10 +123,10 @@ export async function takeScreenshotCanvas (canvas: HTMLCanvasElement): Promise<
     return result
 }
 
-export async function createHTMLImageCanvas (canvas: HTMLCanvasElement, rootElement:HTMLElement = document.documentElement): Promise<HTMLCanvasElement> {
-    const node = rootElement
-    const vw = Math.max(rootElement.clientWidth || 0, window.innerWidth || 0)
-    const vh = Math.max(rootElement.clientHeight || 0, window.innerHeight || 0)
+export async function createHTMLImageCanvas (canvas: HTMLCanvasElement): Promise<HTMLCanvasElement> {
+    const node = document.documentElement
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
     const dataUrl = await domtoimage.toPng(node)
     return new Promise((resolve) => {

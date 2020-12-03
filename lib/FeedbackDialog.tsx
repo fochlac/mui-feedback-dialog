@@ -48,14 +48,13 @@ interface Props {
     open?: boolean;
     noScreenshot?: boolean;
     useScreencapture?: boolean;
-    rootElement?: HTMLElement;
     onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string; email: string }) => unknown;
     className?: string;
     text?: Record<string, string>;
 }
 const email_regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, className, noScreenshot, useScreencapture, rootElement }) => {
+const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, className, noScreenshot, useScreencapture }) => {
     const {
         closeDialog,
         submit,
@@ -77,7 +76,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         email,
         onEmailChange,
         penRef
-    } = useFeedbackDialogController({ onClose, open, onSubmit, useScreencapture, rootElement })
+    } = useFeedbackDialogController({ onClose, open, onSubmit, useScreencapture })
 
     const t = {
         ...defaultText,

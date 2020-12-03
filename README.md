@@ -35,7 +35,6 @@ FeedbackDialog takes 5 props:
 * `open` [boolean]: whether the dialog is shown or not
 * `onClose` [function]: callback to close the dialog
 * `useScreencapture` [boolean=false]: whether to use screencapture or dom-to-html. Also controls whether the `screenshotInfo`-info box will be displayed.
-* `rootElement`: [Node=document.documentElement]: root node that is used for the dom-to-html screencapture. If the screenshot appears white, you most likely need to adjust this to the root element of your webapp.
 * `onSubmit` [function]: callback on submit with the feedback object:
 ```
 {
