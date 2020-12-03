@@ -38,7 +38,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, useScree
 
             const screenCapture: () => Promise<void | HTMLCanvasElement> = () => useScreencapture
                 ? takeScreenshotCanvas(canvasRef.current)
-                : Promise.resolve()
+                : Promise.reject()
 
             screenCapture()
                 .catch(() => createHTMLImageCanvas(canvasRef.current))
