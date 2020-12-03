@@ -1,6 +1,6 @@
 # mui-feedback-dialog [![npm version](https://badge.fury.io/js/mui-feedback-dialog.svg)](https://badge.fury.io/js/mui-feedback-dialog)
 
-A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.
+A customizeable React feedback form with optional screenshot via screen capture or dom-to-html and a canvas editor based on material-ui.
 
 If you want to use my free fully end-to-end encrypted display service for your recieved feedback, you should use [mui-feedback-dialog-connected](https://github.com/fochlac/mui-feedback-dialog-connected). That library uses this dialog but already handles the encryption and submission of the recieved feedback. If you already have your own infrastructure feel free to use this un-opinionated library.
 
@@ -34,6 +34,7 @@ const FeedbackButton: React.FunctionComponent<{ mobile?: boolean }> = () => {
 FeedbackDialog takes 5 props: 
 * `open` [boolean]: whether the dialog is shown or not
 * `onClose` [function]: callback to close the dialog
+* `useScreencapture` [boolean=false]: whether to use screencapture or dom-to-html. Also controls whether the `screenshotInfo`-info box will be displayed.
 * `onSubmit` [function]: callback on submit with the feedback object:
 ```
 {
