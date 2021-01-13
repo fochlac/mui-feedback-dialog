@@ -40,6 +40,9 @@ module.exports = {
         }),
     ],
     resolve: {
+        alias: {
+            react: path.resolve(path.join(__dirname, 'node_modules', 'react')),
+        },
         extensions: ['.js', '.jsx', '.ts', '.tsx', 'css']
     },
     devtool: 'source-map'

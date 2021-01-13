@@ -47,6 +47,7 @@ const defaultText = {
 interface Props {
     open?: boolean;
     noScreenshot?: boolean;
+    attachScreenshotOnOpen?: boolean;
     useScreencapture?: boolean;
     onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string; email: string }) => unknown;
@@ -54,9 +55,19 @@ interface Props {
     text?: Record<string, string>;
 }
 const email_regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, onSubmit, className, noScreenshot, useScreencapture }) => {
+const FeedbackDialog: React.FunctionComponent<Props> = ({
+    open,
+    onClose,
+    attachScreenshotOnOpen,
+    text,
+    onSubmit,
+    className,
+    noScreenshot,
+    useScreencapture
+}) => {
     const {
         closeDialog,
+        dialogVisible,
         submit,
         canSubmit,
         includeSS,
@@ -76,7 +87,13 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
         email,
         onEmailChange,
         penRef
-    } = useFeedbackDialogController({ onClose, open, onSubmit, useScreencapture })
+    } = useFeedbackDialogController({
+        onClose,
+        open,
+        onSubmit,
+        useScreencapture: !noScreenshot && useScreencapture,
+        attachScreenshotOnOpen: !noScreenshot && attachScreenshotOnOpen
+    })
 
     const t = {
         ...defaultText,
@@ -84,7 +101,14 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
     }
 
     return (
-        <Dialog open={open} maxWidth="md" onClose={closeDialog} ref={dialogRef} style={{ marginTop: 48 }} classes={{ container: className }}>
+        <Dialog
+            open={open}
+            maxWidth="md"
+            onClose={closeDialog}
+            ref={dialogRef}
+            style={{ marginTop: 48, visibility: dialogVisible ? 'visible' : 'hidden' }}
+            classes={{ container: className }}
+        >
             <DialogTitle>{t.title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{t.contentText}</DialogContentText>
@@ -93,7 +117,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                     autoFocus
                     value={email}
                     onChange={onEmailChange}
-                    error={email && !email_regex.test(email)}
+                    error={Boolean(email) && !email_regex.test(email)}
                     helperText={email && !email_regex.test(email) && t.emailError}
                     margin="dense"
                     id="email"
@@ -119,7 +143,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({ open, onClose, text, o
                     rows={4}
                     fullWidth
                 />
-                {useScreencapture && !includeSS && (
+                {!noScreenshot && useScreencapture && !includeSS && (
                     <Box
                         style={{
                             display: 'flex',

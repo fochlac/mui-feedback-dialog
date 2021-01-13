@@ -5,56 +5,74 @@ import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
 
-export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture, attachScreenshotOnOpen = false }) {
+    const [dialogVisible, setDialogVisible] = useState(false)
     const [description, setDescription] = useState('')
     const [email, setEmail] = useState('')
-    const [includeSS, setIncludeSS] = useState(false)
+    const [includeSS, setIncludeSS] = useState(attachScreenshotOnOpen)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const drawCanvasRef = useRef<HTMLCanvasElement>(null)
     const penRef = useRef<HTMLDivElement>(null)
     const dialogRef = useRef<HTMLDivElement>(null)
     const [activeTool, setActiveTool] = useState<'pen' | 'eraser' | 'blackbox'>('pen')
+    const createScreenshot = () => {
+        setDialogVisible(false)
+        const screenCapture: () => Promise<void | HTMLCanvasElement> = () => useScreencapture
+            ? takeScreenshotCanvas(canvasRef.current)
+            : Promise.reject()
+
+        return Promise.resolve()
+            .then(screenCapture)
+            .catch(() => createHTMLImageCanvas(canvasRef.current))
+            .catch(() => setIncludeSS(false))
+            .then(() => {
+                drawCanvasRef.current.width = canvasRef.current.width
+                drawCanvasRef.current.height = canvasRef.current.height
+                drawCanvasRef.current.style.width = canvasRef.current.style.width
+                drawCanvasRef.current.getContext('2d').setTransform(canvasRef.current.getContext('2d').getTransform())
+                setDialogVisible(true)
+            })
+    }
 
     usePencil(activeTool === 'pen' && drawCanvasRef, dialogRef, penRef)
     useBlackBox(activeTool === 'blackbox' && drawCanvasRef, dialogRef, penRef)
     useEraser(activeTool === 'eraser' && drawCanvasRef, dialogRef, penRef)
 
     useEffect(() => {
-        setIncludeSS(false)
-        setDescription('')
-        setEmail('')
-        if (canvasRef.current) {
-            canvasRef.current.getContext('2d')
-                .clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight)
-            drawCanvasRef.current.getContext('2d')
-                .clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight)
+        if (open) {
+            setDescription('')
+            setEmail('')
+            setIncludeSS(attachScreenshotOnOpen)
+            if (canvasRef.current) {
+                canvasRef.current.getContext('2d')
+                    .clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight)
+                drawCanvasRef.current.getContext('2d')
+                    .clearRect(0, 0, canvasRef.current.clientWidth, canvasRef.current.clientHeight)
+            }
+            if (attachScreenshotOnOpen) {
+                createScreenshot()
+                    .catch(() => {
+                        setIncludeSS(false)
+                        setDialogVisible(true)
+                    })
+            }
+            else {
+                setDialogVisible(true)
+            }
+        }
+        return () => {
+            setIncludeSS(false)
+            setDialogVisible(false)
         }
     }, [open])
 
     const onSSChange = (e) => {
         const isVisible = e.target.checked
-        if (isVisible) {
-            dialogRef.current.style.visibility = 'hidden'
 
-            const screenCapture: () => Promise<void | HTMLCanvasElement> = () => useScreencapture
-                ? takeScreenshotCanvas(canvasRef.current)
-                : Promise.reject()
-
-            screenCapture()
-                .catch(() => createHTMLImageCanvas(canvasRef.current))
-                .then(() => setIncludeSS(isVisible))
-                .catch(() => setIncludeSS(false))
-                .then(() => {
-                    drawCanvasRef.current.width = canvasRef.current.width
-                    drawCanvasRef.current.height = canvasRef.current.height
-                    drawCanvasRef.current.style.width = canvasRef.current.style.width
-                    drawCanvasRef.current.getContext('2d').setTransform(canvasRef.current.getContext('2d').getTransform())
-                    dialogRef.current.style.visibility = 'visible'
-                })
-        }
-        else {
-            setIncludeSS(isVisible)
-        }
+        createScreenshot()
+            .then(() => {
+                setIncludeSS(isVisible)
+            })
     }
 
     const resetDrawing = () => {
@@ -107,6 +125,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, useScree
         usePen: () => selectTool('pen'),
         isBlackboxActive: activeTool === 'blackbox',
         isPenActive: activeTool === 'pen',
-        isEraserActive: activeTool === 'eraser'
+        isEraserActive: activeTool === 'eraser',
+        dialogVisible
     }
 }
