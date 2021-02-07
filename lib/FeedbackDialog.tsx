@@ -169,7 +169,6 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                                     <Button
                                         onClick={usePen}
                                         variant={isPenActive ? 'contained' : 'outlined'}
-                                        color={isPenActive ? 'primary' : 'default'}
                                         disableElevation
                                         disableRipple
                                     >
@@ -180,7 +179,6 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                                     <Button
                                         onClick={useEraser}
                                         variant={isEraserActive ? 'contained' : 'outlined'}
-                                        color={isEraserActive ? 'primary' : 'default'}
                                         disableElevation
                                         disableRipple
                                     >
@@ -191,7 +189,6 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                                     <Button
                                         onClick={useBlackBox}
                                         variant={isBlackboxActive ? 'contained' : 'outlined'}
-                                        color={isBlackboxActive ? 'primary' : 'default'}
                                         disableElevation
                                         disableRipple
                                     >
@@ -229,7 +226,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                 </Collapse>
             </DialogContent>
             <DialogActions>
-                <Button onClick={closeDialog} color="default" className="cancel-button">
+                <Button onClick={closeDialog} className="cancel-button">
                     {t.cancel}
                 </Button>
                 <Tooltip
