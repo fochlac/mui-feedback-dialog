@@ -113,6 +113,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
             <DialogContent>
                 <DialogContentText>{t.contentText}</DialogContentText>
                 <TextField
+                    variant="standard"
                     style={{ marginBottom: 8 }}
                     autoFocus
                     value={email}
@@ -128,6 +129,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                     fullWidth
                 />
                 <TextField
+                    variant="standard"
                     style={{ overflowY: 'visible', height: 'auto' }}
                     autoFocus
                     value={description}
