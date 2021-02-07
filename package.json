@@ -1,6 +1,6 @@
 {
     "name": "mui-feedback-dialog",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "homepage": "https://github.com/fochlac/mui-feedback-dialog",
     "description": "A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.",
     "main": "dist/index.js",
@@ -32,7 +32,7 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "@material-ui/core": "^5.0.0-alpha.0",
-        "@material-ui/icons": "^4.9.1"
+        "@material-ui/icons": "^5.0.0-alpha.0"
     },
     "devDependencies": {
         "@babel/core": "^7.10.5",
@@ -47,7 +47,7 @@
         "@emotion/react": "^11.0.0",
         "@emotion/styled": "^11.0.0",
         "@material-ui/core": "5.0.0-alpha.24",
-        "@material-ui/icons": "^4.9.1",
+        "@material-ui/icons": "^5.0.0-alpha.24",
         "@types/jest": "^26.0.4",
         "@types/react": "^16.9.43",
         "@types/react-dom": "^16.9.8",
