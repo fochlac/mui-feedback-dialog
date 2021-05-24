@@ -35,8 +35,8 @@ const useStyles = makeStyles<DefaultTheme>({
         textAlign: 'center'
     },
     icon: {
-        width: 120,
-        height: 120
+        width: '120px !important',
+        height: '120px !important'
     }
 })
 
