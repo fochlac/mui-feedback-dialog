@@ -251,7 +251,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
                 >
                     <Button
                         onClick={submit}
-                        disabled={!canSubmit || (email && !email_regex.test(email))}
+                        disabled={Boolean(!canSubmit || (email && !email_regex.test(email)))}
                         component="div"
                         color="primary"
                         className="submit-button"
