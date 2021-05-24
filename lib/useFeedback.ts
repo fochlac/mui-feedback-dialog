@@ -5,10 +5,12 @@ import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
 
-export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture, attachScreenshotOnOpen = false }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture, attachScreenshotOnOpen = false, showSuccessScreen }) {
     const [dialogVisible, setDialogVisible] = useState(false)
     const [description, setDescription] = useState('')
     const [email, setEmail] = useState('')
+    const [error, setError] = useState(null)
+    const [state, setState] = useState<'feedback'|'submit'|'success'|'error'>('feedback')
     const [includeSS, setIncludeSS] = useState(attachScreenshotOnOpen)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const drawCanvasRef = useRef<HTMLCanvasElement>(null)
@@ -42,6 +44,8 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, useScree
         if (open) {
             setDescription('')
             setEmail('')
+            setError(null)
+            setState('feedback')
             setIncludeSS(attachScreenshotOnOpen)
             if (canvasRef.current) {
                 canvasRef.current.getContext('2d')
@@ -101,19 +105,40 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, useScree
         onEmailChange: (e) => setEmail(e.target.value),
         onDescriptionChange: (e) => setDescription(e.target.value),
         includeSS,
-        closeDialog: onClose,
+        closeDialog: () => onClose(false),
         submit: () => {
             if (description.length) {
                 let screenshot = null
+                setState('submit')
                 if (includeSS) {
                     const context = canvasRef.current.getContext('2d')
                     context.drawImage(drawCanvasRef.current, 0, 0)
                     screenshot = canvasRef.current.toDataURL('webp', 0.9)
                 }
-                onSubmit && onSubmit({ description, screenshot, email })
-                onClose()
+                if (showSuccessScreen) {
+                    Promise.resolve(onSubmit && Promise.all([onSubmit({ description, screenshot, email }), new Promise((resolve) => setTimeout(resolve, 500))]))
+                        .then(() => {
+                            setState('success')
+                            setTimeout(() => onClose(true), 1000)
+                        })
+                        .catch((e) => {
+                            if (e && e.message) {
+                                setState('error')
+                                setError(e.message)
+                                setTimeout(() => setState('feedback'), 2000)
+                            }
+                            else {
+                                onClose(false)
+                            }
+                        })
+                }
+                else {
+                    Promise.resolve(onSubmit && onSubmit({ description, screenshot, email })).then(onClose)
+                }
             }
         },
+        state,
+        error,
         canvasRef,
         penRef,
         dialogRef,

@@ -13,7 +13,8 @@ import {
     Box,
     ButtonGroup,
     Tooltip,
-    Typography
+    Typography,
+    Alert
 } from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create'
 import RotateLeftIcon from '@material-ui/icons/RotateLeft'
@@ -22,11 +23,13 @@ import StopIcon from '@material-ui/icons/Stop'
 import { useFeedbackDialogController } from './useFeedback'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import { colors } from '@material-ui/core'
+import { LoadingLayer } from './LoadingLayer'
 
 const defaultText = {
     title: 'Give Feedback',
     cancel: 'Cancel',
     submit: 'Submit Feedback',
+    successText: 'Thank you for submitting feedback.',
     contentText:
         'Thank you for giving feedback. Please describe any issue as detailed as possible. ' +
         'If it is okay to contact you for more details, please write down your email address as well.',
@@ -49,6 +52,7 @@ interface Props {
     noScreenshot?: boolean;
     attachScreenshotOnOpen?: boolean;
     useScreencapture?: boolean;
+    showSuccessScreen?: boolean;
     onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string; email: string }) => unknown;
     className?: string;
@@ -63,6 +67,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
     onSubmit,
     className,
     noScreenshot,
+    showSuccessScreen,
     useScreencapture
 }) => {
     const {
@@ -86,11 +91,14 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
         onDescriptionChange,
         email,
         onEmailChange,
-        penRef
+        penRef,
+        state,
+        error
     } = useFeedbackDialogController({
         onClose,
         open,
         onSubmit,
+        showSuccessScreen,
         useScreencapture: !noScreenshot && useScreencapture,
         attachScreenshotOnOpen: !noScreenshot && attachScreenshotOnOpen
     })
@@ -109,9 +117,11 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
             style={{ marginTop: 48, visibility: dialogVisible ? 'visible' : 'hidden' }}
             classes={{ container: className }}
         >
+            <LoadingLayer state={state} message={t[`${state}Text`] || state === 'error' && error} />
             <DialogTitle>{t.title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>{t.contentText}</DialogContentText>
+                {error && <Alert severity='error'>{error}</Alert>}
                 <TextField
                     variant="standard"
                     style={{ marginBottom: 8 }}

@@ -10,6 +10,7 @@ function App() {
     const [dialogVisible, setDialogVisible] = useState(false);
     const [noScreenshot, setNoScreenshot] = useState(false);
     const [useScreencapture, setUseScreencapture] = useState(false);
+    const [errorOnSubmit, setErrorOnSubmit] = useState(false);
     const [attachScreenshotOnOpen, setAttachScreenshotOnOpen] = useState(false);
     return (
         <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
@@ -21,7 +22,7 @@ function App() {
             <FeedbackDialog
                 open={dialogVisible}
                 onClose={() => setDialogVisible(false)}
-                onSubmit={console.log}
+                onSubmit={(data) => new Promise((resolve, reject) => setTimeout(errorOnSubmit ? () => reject({message: 'Some error occured!'}): resolve, 1500)).then(() => console.log(data))}
                 {...{ noScreenshot, useScreencapture, attachScreenshotOnOpen }}
             />
             <p>You can toggle the props here:</p>
@@ -53,6 +54,17 @@ function App() {
                         />
                     }
                     label={"attachScreenshotOnOpen"}
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={errorOnSubmit}
+                            onChange={(e) => setErrorOnSubmit(e.target.checked)}
+                            name="errorOnSubmit"
+                            color="primary"
+                        />
+                    }
+                    label={"errorOnSubmit"}
                 />
             </div>
         </div>
