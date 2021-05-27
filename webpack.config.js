@@ -13,6 +13,7 @@ module.exports = {
     externals: {
         '@material-ui/icons': '@material-ui/icons',
         "@material-ui/core": '@material-ui/core',
+        "@material-ui/styles": '@material-ui/styles',
         "@material-ui/core/SvgIcon": '@material-ui/core/SvgIcon',
         react: 'react',
         reactDOM: 'react-dom'
