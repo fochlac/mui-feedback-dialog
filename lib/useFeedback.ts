@@ -5,10 +5,10 @@ import { usePencil } from './tools/pencil'
 import { useEraser } from './tools/eraser'
 import { useBlackBox } from './tools/blacken'
 
-export function useFeedbackDialogController ({ onClose, open, onSubmit, useScreencapture, attachScreenshotOnOpen = false, showSuccessScreen }) {
+export function useFeedbackDialogController ({ onClose, open, onSubmit, initialEmail, useScreencapture, attachScreenshotOnOpen = false, showSuccessScreen }) {
     const [dialogVisible, setDialogVisible] = useState(false)
     const [description, setDescription] = useState('')
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(initialEmail || '')
     const [error, setError] = useState(null)
     const [state, setState] = useState<'feedback'|'submit'|'success'|'error'>('feedback')
     const [includeSS, setIncludeSS] = useState(attachScreenshotOnOpen)

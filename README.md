@@ -47,6 +47,7 @@ FeedbackDialog takes 5 props:
 * `attachScreenshotOnOpen` [boolean]: whether the option to show a screenshot is preselected.
 * `showSuccessScreen` [boolean]: whether to show a progress screen during submit and a success or error screen afterwards.
 * `className` [string]: className applied to the dialog component.
+* `initialEmail` [string]: prefill email field.
 * `text` [object]: possibility to overwrite the default strings:
     * title
     * cancel

@@ -55,6 +55,7 @@ interface Props {
     showSuccessScreen?: boolean;
     onClose?: () => void;
     onSubmit?: (feedback: { screenshot?: string; description: string; email: string }) => unknown;
+    initialEmail?: string;
     className?: string;
     text?: Record<string, string>;
 }
@@ -66,6 +67,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
     text,
     onSubmit,
     className,
+    initialEmail,
     noScreenshot,
     showSuccessScreen,
     useScreencapture
@@ -98,6 +100,7 @@ const FeedbackDialog: React.FunctionComponent<Props> = ({
         onClose,
         open,
         onSubmit,
+        initialEmail,
         showSuccessScreen,
         useScreencapture: !noScreenshot && useScreencapture,
         attachScreenshotOnOpen: !noScreenshot && attachScreenshotOnOpen
