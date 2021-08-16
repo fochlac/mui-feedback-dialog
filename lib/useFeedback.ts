@@ -43,7 +43,7 @@ export function useFeedbackDialogController ({ onClose, open, onSubmit, initialE
     useEffect(() => {
         if (open) {
             setDescription('')
-            setEmail('')
+            setEmail(initialEmail || '')
             setError(null)
             setState('feedback')
             setIncludeSS(attachScreenshotOnOpen)
