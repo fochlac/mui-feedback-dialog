@@ -11,6 +11,8 @@ If you want to use my free fully end-to-end encrypted display service for your r
 You also need to include `@material-ui/core`, `@material-ui/icons`, `react`, and `react-dom`. IF you have not already done so, you can install them with: 
 `npm install --save @material-ui/core @material-ui/icons react react-dom`
 
+❗ React 18 is not supported at the moment ❗
+
 Then you can install this library with:
 `npm install --save mui-feedback-dialog`
 
@@ -31,7 +33,7 @@ const FeedbackButton: React.FunctionComponent<{ mobile?: boolean }> = () => {
 }
 ```
 
-FeedbackDialog takes 5 props: 
+FeedbackDialog takes following props: 
 * `open` [boolean]: whether the dialog is shown or not
 * `onClose` [function]: callback to close the dialog
 * `useScreencapture` [boolean=false]: whether to use screencapture or dom-to-html. Also controls whether the `screenshotInfo`-info box will be displayed.
