@@ -1,4 +1,4 @@
-import domtoimage from 'dom-to-image'
+import { toPng } from 'html-to-image'
 
 function getDisplayMedia (options) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,7 +128,7 @@ export async function createHTMLImageCanvas (canvas: HTMLCanvasElement): Promise
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-    const dataUrl = await domtoimage.toPng(node)
+    const dataUrl = await toPng(node)
     return new Promise((resolve) => {
         const image = new Image()
         image.onload = function () {

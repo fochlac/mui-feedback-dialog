@@ -87,6 +87,6 @@
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.10.3",
         "webpack-node-externals": "^2",
-        "dom-to-image": "^2.6.0"
+        "html-to-image": "^1.9.0"
     }
 }
