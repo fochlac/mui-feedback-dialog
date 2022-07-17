@@ -1,6 +1,6 @@
 {
     "name": "mui-feedback-dialog",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "homepage": "https://github.com/fochlac/mui-feedback-dialog",
     "description": "A customizeable React feedback form with optional screenshot via screen capture and canvas editor based on material-ui.",
     "main": "dist/index.js",
