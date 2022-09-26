@@ -72,4 +72,4 @@ FeedbackDialog takes following props:
 ![SampleScreenshot](https://github.com/fochlac/mui-feedback-dialog/blob/master/feedback-dialog.jpg?raw=true)
 
 ## Demo
-[CodeSandbox - Demo](https://codesandbox.io/s/feedback-dialog-fdp7b)
+[CodeSandbox - Demo](https://codesandbox.io/s/feedback-dialog-forked-lk4x4h)
