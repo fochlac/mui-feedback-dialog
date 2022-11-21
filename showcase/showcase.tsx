@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { StrictMode, useState } from "react";
 
-import { Checkbox, FormControlLabel, IconButton } from "@material-ui/core";
+import { Checkbox, FormControlLabel, IconButton } from "@mui/material";
 
-import FeedbackIcon from "@material-ui/icons/Feedback";
-import { FeedbackDialog } from "../lib/index";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+import { FeedbackDialog } from "../lib";
+import { createRoot } from 'react-dom/client';
 
 function App() {
     const [dialogVisible, setDialogVisible] = useState(false);
@@ -71,10 +71,13 @@ function App() {
     );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    rootElement
-);
+const container = document.getElementById('root') as HTMLElement;
+if (container) {
+    const root = createRoot(container);
+
+    root.render(
+        <StrictMode>
+            <App />
+        </StrictMode>
+    );
+}
