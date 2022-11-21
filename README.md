@@ -11,8 +11,6 @@ If you want to use my free fully end-to-end encrypted display service for your r
 You also need to include `@material-ui/core`, `@material-ui/icons`, `react`, and `react-dom`. IF you have not already done so, you can install them with: 
 `npm install --save @material-ui/core @material-ui/icons react react-dom`
 
-❗ React 18 is not supported at the moment ❗
-
 Then you can install this library with:
 `npm install --save mui-feedback-dialog`
 
