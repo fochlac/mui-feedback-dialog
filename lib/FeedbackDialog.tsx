@@ -15,14 +15,14 @@ import {
     Tooltip,
     Typography,
     Alert
-} from '@material-ui/core'
-import CreateIcon from '@material-ui/icons/Create'
-import RotateLeftIcon from '@material-ui/icons/RotateLeft'
+} from '@mui/material'
+import CreateIcon from '@mui/icons-material/Create'
+import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 import { EraserIcon } from './icons/Eraser'
-import StopIcon from '@material-ui/icons/Stop'
+import StopIcon from '@mui/icons-material/Stop'
 import { useFeedbackDialogController } from './useFeedback'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import { colors } from '@material-ui/core'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import { colors } from '@mui/material'
 import { LoadingLayer } from './LoadingLayer'
 
 const defaultText = {

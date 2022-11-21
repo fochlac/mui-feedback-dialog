@@ -1,6 +1,7 @@
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon'
+
 
 import React from 'react'
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
 const path = 'M 185.739 20.927 L 335.739 20.927 C 343.664 21.146 351.694 22.962 359.03 26.012 C 366.367 ' +
     '29.062 373.011 33.347 378.165 38.501 C 383.32 43.655 387.604 50.299 390.654 57.636 C 391.113 58.739 393.006 ' +

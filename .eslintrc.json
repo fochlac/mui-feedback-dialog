@@ -187,6 +187,8 @@
         "no-control-regex": 2,
         "no-debugger": 2,
         "no-delete-var": 2,
+        "no-nonoctal-decimal-escape": 2,
+        "no-unsafe-optional-chaining": 2,
         "no-dupe-args": 2,
         "no-dupe-class-members": 2,
         "no-dupe-keys": 2,

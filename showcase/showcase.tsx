@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { StrictMode, useState } from 'react'
 
-import { Checkbox, FormControlLabel, IconButton } from '@material-ui/core'
+import { Checkbox, FormControlLabel, IconButton } from '@mui/material'
 
-import FeedbackIcon from '@material-ui/icons/Feedback'
-import { FeedbackDialog } from '../lib/index'
+import FeedbackIcon from '@mui/icons-material/Feedback'
+import { FeedbackDialog } from '../lib'
+import { createRoot } from 'react-dom/client'
 
 function App () {
     const [dialogVisible, setDialogVisible] = useState(false)
@@ -23,8 +23,7 @@ function App () {
             else {
                 setTimeout(resolve, 1500)
             }
-        })
-            .then(() => console.log(data))
+        }).then(() => console.log(data))
     }
 
     return (
@@ -84,40 +83,35 @@ function App () {
                 />
                 <FormControlLabel
                     control={
-                        <Checkbox
-                            checked={errorOnSubmit}
-                            onChange={(e) => setErrorOnSubmit(e.target.checked)}
-                            name="errorOnSubmit"
-                            color="primary"
-                        />
+                        <Checkbox checked={errorOnSubmit} onChange={(e) => setErrorOnSubmit(e.target.checked)} name="errorOnSubmit" color="primary" />
                     }
                     label={'errorOnSubmit'}
                 />
                 <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={showList}
-                            onChange={(e) => setShowList(e.target.checked)}
-                            name="errorOnSubmit"
-                            color="primary"
-                        />
-                    }
+                    control={<Checkbox checked={showList} onChange={(e) => setShowList(e.target.checked)} name="errorOnSubmit" color="primary" />}
                     label={'Show list with scrolling'}
                 />
             </div>
             {showList && (
                 <div style={{ height: 300, overflow: 'auto', marginTop: 16, minWidth: '50%', textAlign: 'center' }}>
-                    {Array(100).fill(0).map((_v, idx) => <div key={idx}>Testcontent for Scrolling {idx}</div>)}
+                    {Array(100)
+                        .fill(0)
+                        .map((_v, idx) => (
+                            <div key={idx}>Testcontent for Scrolling {idx}</div>
+                        ))}
                 </div>
             )}
         </div>
     )
 }
 
-const rootElement = document.getElementById('root')
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    rootElement
-)
+const container = document.getElementById('root') as HTMLElement
+if (container) {
+    const root = createRoot(container)
+
+    root.render(
+        <StrictMode>
+            <App />
+        </StrictMode>
+    )
+}
