@@ -1,4 +1,4 @@
-import { toPng } from 'html-to-image'
+import { domToPng } from 'modern-screenshot'
 
 function getDisplayMedia (options) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -128,7 +128,7 @@ export async function createHTMLImageCanvas (canvas: HTMLCanvasElement): Promise
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
 
-    const dataUrl = await toPng(node)
+    const dataUrl = await domToPng(node, { features: { restoreScrollPosition: true } })
     return new Promise((resolve) => {
         const image = new Image()
         image.onload = function () {
